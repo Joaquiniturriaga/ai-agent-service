@@ -4,6 +4,7 @@ from src.config.settings import settings
 _client: httpx.AsyncClient | None = None
 
 
+
 def get_client() -> httpx.AsyncClient:
     global _client
     if _client is None or _client.is_closed:
