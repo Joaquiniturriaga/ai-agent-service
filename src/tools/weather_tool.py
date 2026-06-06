@@ -28,7 +28,7 @@ async def get_weather_risk(lat: float, lng: float) -> str:
         lng: Longitud (ej: -70.65 Santiago, -70.98 San Fernando, -72.5 Biobío)
     """
     url = (
-        "https://api.open-meteo.com/v1/forecast"
+        "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m"
         f"?latitude={lat}&longitude={lng}"
         "&current=temperature_2m,relative_humidity_2m,"
         "wind_speed_10m,precipitation,weather_code"
