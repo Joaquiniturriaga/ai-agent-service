@@ -1,19 +1,5 @@
-"""
-Tool: get_weather_risk
-Open-Meteo (sin API key) → temperatura, humedad, viento, precipitación.
-
-Índice de riesgo simplificado (0–11 pts):
-  Temperatura >35°C          → +3  |  25-35°C → +2
-  Humedad <20%               → +3  |  20-40%  → +2
-  Viento >40 km/h            → +2  |  20-40   → +1
-  Sin lluvia en 24h          → +1
-
-Score → BAJO(0-2) / MODERADO(3-5) / ALTO(6-8) / EXTREMO(9+)
-"""
-
 import httpx
 from langchain_core.tools import tool
-
 
 @tool
 async def get_weather_risk(lat: float, lng: float) -> str:
@@ -27,11 +13,11 @@ async def get_weather_risk(lat: float, lng: float) -> str:
         lat: Latitud (ej: -33.45 Santiago, -34.17 San Fernando, -37.5 Biobío)
         lng: Longitud (ej: -70.65 Santiago, -70.98 San Fernando, -72.5 Biobío)
     """
+    # URL Corregida: Limpia, dinámica y sin las coordenadas de Berlín
     url = (
-        "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m"
+        f"https://api.open-meteo.com/v1/forecast"
         f"?latitude={lat}&longitude={lng}"
-        "&current=temperature_2m,relative_humidity_2m,"
-        "wind_speed_10m,precipitation,weather_code"
+        "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,weather_code"
         "&hourly=precipitation&forecast_days=1&timezone=auto"
     )
 
